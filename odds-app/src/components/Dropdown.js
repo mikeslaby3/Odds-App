@@ -8,7 +8,7 @@ const Dropdown = styled.select`
 `;
 
 const dropdown = (props) => (
-  <Dropdown>
+  <Dropdown value={props.value} onChange={props.change}>
     <option>{props.directions}</option>
     {props.children}
   </Dropdown>
