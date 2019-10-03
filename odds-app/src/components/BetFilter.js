@@ -4,20 +4,24 @@ import styled from 'styled-components';
 import Dropdown from './Dropdown';
 import DropdownTitle from './DropdownTitle';
 
-const Parameter = styled.div`
+const BetFilter = styled.div`
   height: 100px;
   width: 200px;
   background-color: grey;
   padding: 5px;
 `;
 
-const betParam = (props) => (
-  <Parameter>
+const betFilter = (props) => (
+  <BetFilter>
     <DropdownTitle title={props.dropdownTitle}/>
-    <Dropdown directions={props.dropdownDirections}>
+    <Dropdown 
+      value={props.selectedValue} 
+      change={props.formChange} 
+      directions={props.dropdownDirections}
+    >
       {props.options}
     </Dropdown>
-  </Parameter>
+  </BetFilter>
 )
 
-export default betParam;
+export default betFilter;
