@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-import Sports from './containers/Sports';
+import Parameters from './containers/Parameters';
 
 class App extends Component {
 
   render () {
     return (
-      <div>
+      <BrowserRouter>
         <h1>Odds App</h1>
-        <Sports />
-      </div>
+        <Parameters />
+      </BrowserRouter>
     );
   }
 }
