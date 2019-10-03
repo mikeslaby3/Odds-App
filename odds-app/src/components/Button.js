@@ -8,7 +8,7 @@ const Button = styled.button`
 `;
 
 const button = (props) => (
-    <Button onClick={props.click}>{props.name}</Button>
+    <Button onClick={props.submit}>{props.name}</Button>
 )
 
 export default button;
