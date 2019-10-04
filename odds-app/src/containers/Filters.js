@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import BetFilter from '../components/BetFilter';
 import Button from '../components/Button';
+import Game from '../components/Game';
+// import months from '../months';
 
 const API_KEY = process.env.REACT_APP_ODDS_API_KEY;
 
@@ -19,19 +21,14 @@ const FilterContainer = styled.div`
 class Filters extends Component {
     state = {
         sportsInSeason: null,
-        regions: [
-          'United States',
-          'United Kingdom',
-          'Australia',
-        ],
         markets: [
           'Moneyline',
           'Spread',
           'Over-Under'
         ],
         selectedSport: "",
-        selectedRegion: "",
-        selectedMarket: ""
+        selectedMarket: "",
+        gameLines: null
     }
     
     componentDidMount() {
@@ -55,31 +52,13 @@ class Filters extends Component {
       this.setState({ selectedSport: e.target.value });
     }
 
-    handleRegionChoice = (e) => {
-      this.setState({ selectedRegion: e.target.value });
-    }
-
     handleMarketChoice = (e) => {
       this.setState({ selectedMarket: e.target.value });
     }
 
     createQueryUrl = () => {
-      let region;
       let market;
       let sport = this.state.selectedSport 
-
-      switch(this.state.selectedRegion) {
-        case 'United States':
-          region = 'us';
-          break;
-        case 'United Kingdom':
-          region = 'uk';
-          break;
-        case 'Australia':
-          region = 'au';
-          break;
-        default: region = 'us';
-      }
 
       switch(this.state.selectedMarket) {
         case 'Moneyline':
@@ -94,25 +73,49 @@ class Filters extends Component {
         default: market = 'spreads'
       }
 
-      return `https://api.the-odds-api.com/v3/odds/?apiKey=${API_KEY}&sport=${sport}&mkt=${market}&region=${region}`;
+      return `https://api.the-odds-api.com/v3/odds/?apiKey=${API_KEY}&sport=${sport}&mkt=${market}&region=us`;
     } 
 
     handleSubmit = () => {
-      console.log(this.state.selectedSport);
-      console.log(this.state.selectedRegion);
-      console.log(this.state.selectedMarket);
-      this.createQueryUrl();
+      axios.get(this.createQueryUrl())
+        .then(res => {
+          this.setState({ gameLines: res.data.data });
+        })
+        .catch(err => {
+          console.log(err)
+        });
     }
 
     render () {
         let sports = null;
 
         if (this.state.sportsInSeason) {
-            sports = this.state.sportsInSeason.map((sport) => <option key={sport.key} value={sport.key}>{sport.title}</option>);
+          sports = this.state.sportsInSeason
+            .filter(sport => 
+              (sport.title === 'NFL' || 
+              sport.title === 'NCAAF' || 
+              sport.title === 'MLB' || 
+              sport.title === 'NBA' || 
+              sport.title === 'NHL'))
+            .map(sport => 
+              <option key={sport.key} value={sport.key}>{sport.title}</option>);
         }
         
-        const regions = this.createDropdownOptions(this.state.regions);
         const markets = this.createDropdownOptions(this.state.markets);
+
+        // let games = null;
+
+        // if (this.state.gameLines) {
+        //   games = this.state.gameLines.map((game) => 
+        //     <Game
+        //       key={game.home_team}
+        //       awayTeam={game.teams[0]}
+        //       homeTeam={game.teams[1]}
+        //       time={game.commence_time}
+        //       market={this.state.selectedMarket}
+        //       // odds={game.sites[0]}
+        //     />)
+        // }
 
         return (
           <Fragment>
@@ -125,13 +128,6 @@ class Filters extends Component {
                 options={sports} 
               />
               <BetFilter 
-                selectedValue={this.state.selectedRegion}
-                formChange={this.handleRegionChoice}
-                dropdownTitle="Bookmaker Region"
-                dropdownDirections="Choose a Region"
-                options={regions}
-              />
-              <BetFilter 
                 selectedValue={this.state.selectedMarket}
                 formChange={this.handleMarketChoice}
                 dropdownTitle="Odds Market"
@@ -140,6 +136,7 @@ class Filters extends Component {
               />
             </FilterContainer>
             <Button name="Submit" submit={this.handleSubmit} />
+            <Game />
           </Fragment>
         );
     }
