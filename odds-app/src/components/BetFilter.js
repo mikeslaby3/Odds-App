@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Dropdown from './Dropdown';
-import DropdownTitle from './DropdownTitle';
+import Dropdown from "./Dropdown";
+import DropdownTitle from "./DropdownTitle";
 
 const BetFilter = styled.div`
   height: 100px;
@@ -11,17 +11,17 @@ const BetFilter = styled.div`
   padding: 5px;
 `;
 
-const betFilter = (props) => (
+const betFilter = props => (
   <BetFilter>
-    <DropdownTitle title={props.dropdownTitle}/>
-    <Dropdown 
-      value={props.selectedValue} 
-      change={props.formChange} 
+    <DropdownTitle title={props.dropdownTitle} />
+    <Dropdown
+      value={props.selectedValue}
+      change={props.formChange}
       directions={props.dropdownDirections}
     >
       {props.options}
     </Dropdown>
   </BetFilter>
-)
+);
 
 export default betFilter;
