@@ -2,16 +2,43 @@ import React from 'react';
 import styled from 'styled-components';
 
 const GameContainer = styled.div`
-  height: 400px;
+  height: 100%;
   width: 250px;
-  background-color: grey;
-  padding: 10px;
+  padding: 20px;
   text-align: center;
+  margin: 0 auto;
+  background-color: #adbce6;
+  border: solid 2px;
+  border-radius: 10px;
 `;
 
-const Team = styled.h1`
-  font-size: 20px;
+const Matchup = styled.div`
+  border: double;
+  background-color: #e8f4f8;
+  padding: 20px 0 10px 0;
 `;
+
+const InfoContainer = styled.div`
+  border: solid 2px;
+  margin: 20px;
+  background-color: #e6bbad;
+  padding: 15px 0 10px 0;
+`;
+
+
+const Header = styled.h1`
+  font-size: 25px;
+  font-family: "Josefin Sans", sans-serif;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+`;
+
+const Details = styled.p`
+  font-size: 18px;
+  font-family: "Quicksand", sans-serif;
+  margin-bottom: 5px;
+`;
+
 
 const convertUnixToTime = unix => {
     const monthsArray = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -52,21 +79,40 @@ const getTeamCity = team => {
 };
 
 const game = props => (
+  // <GameContainer>
+  //   <Team>{props.awayTeam}</Team>
+  //   <p>vs</p>
+  //   <Team>{props.homeTeam}</Team>
+  //   <h2>Game Start: {convertUnixToTime(props.time)}</h2>
+  //   <h2>{props.market}:</h2>
+  //   <h3>
+  //     {getTeamCity(props.awayTeam)}:{" "}
+  //     {convertDecimalOddsToMoneyline(props.away)}{" "}
+  //     {formatPointSpread(props.awayPoints)}
+  //   </h3>
+  //   <h3>
+  //     {getTeamCity(props.homeTeam)}:{" "}
+  //     {convertDecimalOddsToMoneyline(props.homeOdds)}{" "}
+  //     {formatPointSpread(props.homePoints)}
+  //   </h3>
+  //   <h3>Save Pick</h3>
+  // </GameContainer>
   <GameContainer>
-    <Team>{props.awayTeam}</Team>
-    <p>vs</p>
-    <Team>{props.homeTeam}</Team>
-    <h2>Game Start: {convertUnixToTime(props.time)}</h2>
-    <h2>{props.market}:</h2>
-    <h3>
-      {getTeamCity(props.awayTeam)}: {convertDecimalOddsToMoneyline(props.awayOdds)}{" "}
-      {formatPointSpread(props.awayPoints)}
-    </h3>
-    <h3>
-      {getTeamCity(props.homeTeam)}: {convertDecimalOddsToMoneyline(props.homeOdds)}{" "}
-      {formatPointSpread(props.homePoints)}
-    </h3>
-    <h3>Save Pick</h3>
+    <Matchup>
+      <Header>Indianapolis Colts</Header>
+      <p style={{marginBottom: '15px'}}>at</p>
+      <Header>Kansas City Chiefs</Header>
+    </Matchup>
+    <InfoContainer>
+      <Header>Game Start: </Header>
+      <Details>Oct 6 2019 5:20 PM</Details>
+    </InfoContainer>
+    <InfoContainer>
+      <Header>Spread:</Header>
+      <Details>Indianapolis: -150 -3.5</Details>
+      <Details>Kansas City: -150 -2.5</Details>
+    </InfoContainer>
+      {/* <Details>Save Pick</Details> */}
   </GameContainer>
 );
 
