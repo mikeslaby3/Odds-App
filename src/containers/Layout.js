@@ -101,7 +101,7 @@ class Layout extends Component {
 
     const markets = this.createDropdownOptions(this.state.markets);
 
-    let games = <p>No games to show</p>;
+    let games = <p style={{textAlign: 'center'}}>No games to show</p>;
 
     if (this.state.gameLines) {
       if (this.state.selectedMarket === 'Spread') {
