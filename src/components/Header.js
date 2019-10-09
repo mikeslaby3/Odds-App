@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { device } from '../device';
 
 const Container = styled.div`
   margin: 25px auto;
@@ -11,6 +12,10 @@ const AppName = styled.h1`
   font-family: "Notable", sans-serif;
   margin-bottom: 20px;
   text-align: center;
+
+  @media ${device.laptop} {
+    font-size: 45px;
+  }
 `;
 
 const Description = styled.div`
@@ -21,10 +26,18 @@ const Title = styled.h2`
   font-size: 25px;
   margin-bottom: 10px;
   text-align: center;
+
+  @media ${device.laptop} {
+    font-size: 35px;
+  }
 `;
 
 const Rule = styled.p`
   margin-bottom: 7px;
+
+  @media ${device.laptop} {
+    font-size: 20px;
+  }
 `;
 
 const header = props => (

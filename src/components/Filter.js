@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { device } from '../device';
 
 const Container = styled.div`
   height: 150px;
@@ -12,6 +13,10 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
+
+  @media ${device.laptop} {
+    margin: 0 20px;
+  }
 `;
 
 const Filter = styled.div`

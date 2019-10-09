@@ -6,6 +6,7 @@ import Filter from '../components/Filter';
 import Button from '../components/Button';
 import Game from '../components/Game';
 import Header from "../components/Header";
+import { device } from '../device';
 
 const API_KEY = process.env.REACT_APP_ODDS_API_KEY;
 
@@ -13,6 +14,28 @@ const StyledContainer = styled.div`
   margin: 30px auto;
   width: 350px;
   height: 100%;
+
+  @media ${device.laptop} {
+    width: 800px;
+  }
+`;
+
+const FilterContainer = styled.div`
+  @media ${device.laptop} {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+  }
+`;
+
+const GamesContainer = styled(StyledContainer)`
+  @media ${device.laptop} {
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 `;
 
 class Layout extends Component {
@@ -166,25 +189,27 @@ class Layout extends Component {
       <Fragment>
         <StyledContainer>
           <Header />
-          <Filter
-            title="NFL or NCAA"
-            directions="Choose a Sport"
-            change={this.handleSportChoice}
-          >
-            {sports}
-          </Filter>
-          <Filter 
-            title="Odds Market" 
-            directions="Choose a Market"
-            change={this.handleMarketChoice}
-          >
-            {markets}
-          </Filter>
+          <FilterContainer>
+            <Filter
+              title="NFL or NCAA"
+              directions="Choose a Sport"
+              change={this.handleSportChoice}
+            >
+              {sports}
+            </Filter>
+            <Filter 
+              title="Odds Market" 
+              directions="Choose a Market"
+              change={this.handleMarketChoice}
+            >
+              {markets}
+            </Filter>
+          </FilterContainer>
         </StyledContainer>
         <Button name="Submit" submit={this.handleSubmit} />
-        <StyledContainer>
+        <GamesContainer>
           {games}
-        </StyledContainer>
+        </GamesContainer>
       </Fragment>
     );
   }

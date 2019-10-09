@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { device } from '../device';
 
 const GameContainer = styled.div`
   height: 100%;
@@ -10,6 +11,11 @@ const GameContainer = styled.div`
   background-color: #adbce6;
   border: solid 2px;
   border-radius: 10px;
+
+  @media ${device.laptop} {
+    margin: 25px 0;
+    height: 511px;
+  }
 `;
 
 const Matchup = styled.div`
