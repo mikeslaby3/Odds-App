@@ -70,38 +70,31 @@ const formatPointSpread = spread => {
   return (spread > 0) ? `+${spread}` : spread;
 }
 
-const getTeamCity = team => {
-  const wordArray = team.split(" ");
-  const justTheCityArray = (wordArray.length === 3) ? wordArray.slice(0, 2) : wordArray.slice(0, 1);
-  const city = justTheCityArray.join(' ');
-  return city;
-};
-
 const game = props => (
   <GameContainer>
     <Matchup>
-      <Header>{props.awayTeam}</Header>
-      <p style={{ marginBottom: "15px" }}>at</p>
-      <Header>{props.homeTeam}</Header>
+      <Header>{props.teamOne}</Header>
+      <p style={{ marginBottom: "15px" }}>vs</p>
+      <Header>{props.teamTwo}</Header>
     </Matchup>
     <InfoContainer>
       <Header>Game Start: </Header>
       <Details>{convertUnixToTime(props.time)}</Details>
+      <Details>@ {props.homeTeam}</Details>
     </InfoContainer>
     <InfoContainer>
       <Header>{props.market}:</Header>
       <Details>
-        {getTeamCity(props.awayTeam)}:{" "}
-        {convertDecimalOddsToMoneyline(props.awayOdds)}{" "}
-        {formatPointSpread(props.awayPoints)}
+        {props.oddsTitleOne}:{" "}
+        {convertDecimalOddsToMoneyline(props.teamOneOdds)}{" "}
+        {formatPointSpread(props.teamOnePoints)}
       </Details>
       <Details>
-        {getTeamCity(props.homeTeam)}:{" "}
-        {convertDecimalOddsToMoneyline(props.homeOdds)}{" "}
-        {formatPointSpread(props.homePoints)}
+        {props.oddsTitleTwo}:{" "}
+        {convertDecimalOddsToMoneyline(props.teamTwoOdds)}{" "}
+        {formatPointSpread(props.teamTwoPoints)}
       </Details>
     </InfoContainer>
-    {/* <Details>Save Pick</Details> */}
   </GameContainer>
 );
 
