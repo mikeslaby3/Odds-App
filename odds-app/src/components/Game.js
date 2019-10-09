@@ -6,7 +6,7 @@ const GameContainer = styled.div`
   width: 250px;
   padding: 20px;
   text-align: center;
-  margin: 0 auto;
+  margin: 0 auto 25px;
   background-color: #adbce6;
   border: solid 2px;
   border-radius: 10px;
@@ -24,7 +24,6 @@ const InfoContainer = styled.div`
   background-color: #e6bbad;
   padding: 15px 0 10px 0;
 `;
-
 
 const Header = styled.h1`
   font-size: 25px;
@@ -79,40 +78,30 @@ const getTeamCity = team => {
 };
 
 const game = props => (
-  // <GameContainer>
-  //   <Team>{props.awayTeam}</Team>
-  //   <p>vs</p>
-  //   <Team>{props.homeTeam}</Team>
-  //   <h2>Game Start: {convertUnixToTime(props.time)}</h2>
-  //   <h2>{props.market}:</h2>
-  //   <h3>
-  //     {getTeamCity(props.awayTeam)}:{" "}
-  //     {convertDecimalOddsToMoneyline(props.away)}{" "}
-  //     {formatPointSpread(props.awayPoints)}
-  //   </h3>
-  //   <h3>
-  //     {getTeamCity(props.homeTeam)}:{" "}
-  //     {convertDecimalOddsToMoneyline(props.homeOdds)}{" "}
-  //     {formatPointSpread(props.homePoints)}
-  //   </h3>
-  //   <h3>Save Pick</h3>
-  // </GameContainer>
   <GameContainer>
     <Matchup>
-      <Header>Indianapolis Colts</Header>
-      <p style={{marginBottom: '15px'}}>at</p>
-      <Header>Kansas City Chiefs</Header>
+      <Header>{props.awayTeam}</Header>
+      <p style={{ marginBottom: "15px" }}>at</p>
+      <Header>{props.homeTeam}</Header>
     </Matchup>
     <InfoContainer>
       <Header>Game Start: </Header>
-      <Details>Oct 6 2019 5:20 PM</Details>
+      <Details>{convertUnixToTime(props.time)}</Details>
     </InfoContainer>
     <InfoContainer>
-      <Header>Spread:</Header>
-      <Details>Indianapolis: -150 -3.5</Details>
-      <Details>Kansas City: -150 -2.5</Details>
+      <Header>{props.market}:</Header>
+      <Details>
+        {getTeamCity(props.awayTeam)}:{" "}
+        {convertDecimalOddsToMoneyline(props.awayOdds)}{" "}
+        {formatPointSpread(props.awayPoints)}
+      </Details>
+      <Details>
+        {getTeamCity(props.homeTeam)}:{" "}
+        {convertDecimalOddsToMoneyline(props.homeOdds)}{" "}
+        {formatPointSpread(props.homePoints)}
+      </Details>
     </InfoContainer>
-      {/* <Details>Save Pick</Details> */}
+    {/* <Details>Save Pick</Details> */}
   </GameContainer>
 );
 
