@@ -5,6 +5,10 @@ import { device } from '../device';
 const Container = styled.div`
   margin: 25px auto;
   text-align: center;
+
+  @media ${device.laptop} {
+    margin-bottom: 40px;
+  }
 `;
 
 const AppName = styled.h1`
@@ -15,6 +19,7 @@ const AppName = styled.h1`
 
   @media ${device.laptop} {
     font-size: 45px;
+    margin-bottom: 40px;
   }
 `;
 
